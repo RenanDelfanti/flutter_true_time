@@ -39,7 +39,7 @@ public class TrueTimePlugin implements MethodCallHandler {
                 TrueTimeRx.build()
                         .withConnectionTimeout((int) call.argument("timeout"))
                         .withRetryCount((int) call.argument("retryCount"))
-                        .withSharedPreferencesCache(this)
+                        .withSharedPreferencesCache(context)
                         .withLoggingEnabled((Boolean) call.argument("logging"))
                         .initializeRx((String) call.argument("ntpServer"))
                         .subscribeOn(Schedulers.io())
