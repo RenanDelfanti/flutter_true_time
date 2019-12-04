@@ -24,9 +24,12 @@ public class TrueTimePlugin implements MethodCallHandler {
     /**
      * Plugin registration.
      */
+    private static Registrar instance;
+
     public static void registerWith(Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "true_time");
         channel.setMethodCallHandler(new TrueTimePlugin());
+        instance = registrar;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class TrueTimePlugin implements MethodCallHandler {
                 TrueTimeRx.build()
                         .withConnectionTimeout((int) call.argument("timeout"))
                         .withRetryCount((int) call.argument("retryCount"))
-                        .withSharedPreferencesCache(registrar.context())
+                        .withSharedPreferencesCache(instance.context())
                         .withLoggingEnabled((Boolean) call.argument("logging"))
                         .initializeRx((String) call.argument("ntpServer"))
                         .subscribeOn(Schedulers.io())
