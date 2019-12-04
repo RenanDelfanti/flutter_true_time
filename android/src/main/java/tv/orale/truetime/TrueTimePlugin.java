@@ -28,7 +28,6 @@ public class TrueTimePlugin implements MethodCallHandler {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "true_time");
         channel.setMethodCallHandler(new TrueTimePlugin());
     }
-    instance = registrar;
 
     @Override
     public void onMethodCall(MethodCall call, final Result result) {
@@ -40,7 +39,7 @@ public class TrueTimePlugin implements MethodCallHandler {
                 TrueTimeRx.build()
                         .withConnectionTimeout((int) call.argument("timeout"))
                         .withRetryCount((int) call.argument("retryCount"))
-                        .withSharedPreferencesCache(instance.context())
+                        .withSharedPreferencesCache(registrar.context())
                         .withLoggingEnabled((Boolean) call.argument("logging"))
                         .initializeRx((String) call.argument("ntpServer"))
                         .subscribeOn(Schedulers.io())
