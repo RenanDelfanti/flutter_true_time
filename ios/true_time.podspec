@@ -15,7 +15,7 @@ A new flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'TrueTime'
+  s.dependency 'TrueTime' , '~> 5.0.3'
   
   s.ios.deployment_target = '8.0'
 end
